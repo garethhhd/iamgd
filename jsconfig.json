@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "baseUrl": "node_modules",
+    "paths": {
+      "@/*": ["../src/*"],
+      "@components/*": ["../src/components/*"],
+      "@services/*": ["../src/services/*"],
+      "@context/*": ["../src/context/*"],
+      "@constants/*": ["../src/constants/*"],
+      "@images/*": ["../src/images/*"],
+      "@svgs/*": ["../src/svgs/*"],
+      "@queries/*": ["../src/queries/*"]
+    }
+  },
+  "include": ["src/**/*"]
+}

@@ -1,0 +1,43 @@
+/* purgecss start ignore */
+@tailwind base;
+@tailwind components;
+/* purgecss end ignore */
+@tailwind utilities;
+
+a.nav::after {
+  @apply absolute bottom-0 block w-full bg-primary;
+  content: "";
+  height: 2px;
+  transform: translateX(-101%);
+}
+a.nav:hover::after {
+  transition: transform 0.3s cubic-bezier(0.5, 0.7, 0.4, 1);
+  transform: translateX(0);
+}
+a.nav.animate-out::after {
+  transition: transform 0.3s cubic-bezier(0.5, 0.7, 0.4, 1);
+  transform: translateX(100%);
+}
+
+a.line-item::after {
+  @apply absolute bottom-0 block w-full bg-white;
+  content: "";
+  height: 4px;
+  transform: translateX(-101%);
+}
+a.line-item:hover::after {
+  transition: transform 0.4s cubic-bezier(0.5, 0.7, 0.4, 1);
+  transform: translateX(0);
+}
+a.line-item.animate-out::after {
+  transition: transform 0.4s cubic-bezier(0.5, 0.7, 0.4, 1);
+  transform: translateX(100%);
+}
+
+code {
+  @apply inline px-2 py-3 font-mono text-sm leading-loose bg-gray-100;
+}
+
+pre code {
+  @apply block p-4 bg-black rounded;
+}
