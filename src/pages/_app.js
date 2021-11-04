@@ -1,6 +1,6 @@
-import "../styles/index.css";
-
-import Header from "@components/Layout/header";
+import '../styles/index.css';
+import { useEffect } from 'react';
+import Header from '@components/Layout/header';
 
 function MyApp({ Component, pageProps }) {
   return (

@@ -1,3 +1,10 @@
+import Mouse from './cursor';
+
 export default function Layout({ preview, children }) {
-  return <>{children}</>;
+  return (
+    <>
+      <Mouse />
+      {children}
+    </>
+  );
 }

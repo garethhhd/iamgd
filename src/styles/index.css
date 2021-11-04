@@ -1,12 +1,22 @@
-/* purgecss start ignore */
+/* purgecss start ignore
 @tailwind base;
 @tailwind components;
 /* purgecss end ignore */
-@tailwind utilities;
+/* @tailwind utilities; */
+
+/* Tailwind base/components */
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+
+/* Custom Style Imports */
+@import '_locomotive.css';
+
+/* Tailwind Utilities */
+@import 'tailwindcss/utilities';
 
 a.nav::after {
   @apply absolute bottom-0 block w-full bg-primary;
-  content: "";
+  content: '';
   height: 2px;
   transform: translateX(-101%);
 }
@@ -21,7 +31,7 @@ a.nav.animate-out::after {
 
 a.line-item::after {
   @apply absolute bottom-0 block w-full bg-white;
-  content: "";
+  content: '';
   height: 4px;
   transform: translateX(-101%);
 }
@@ -40,4 +50,24 @@ code {
 
 pre code {
   @apply block p-4 bg-black rounded;
+}
+
+.cursor {
+  display: none;
+}
+
+@media (any-pointer: fine) {
+  .cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: block;
+    pointer-events: none;
+  }
+  .cursor__inner {
+    fill: #f32015;
+    stroke: #f32015;
+    stroke-width: 1px;
+    opacity: 0.3;
+  }
 }

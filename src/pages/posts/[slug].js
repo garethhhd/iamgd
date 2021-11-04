@@ -1,23 +1,27 @@
-import { useRouter } from "next/router";
-import ErrorPage from "next/error";
-import Head from "next/head";
+import { useRef } from 'react';
+import { LocomotiveScrollProvider } from 'react-locomotive-scroll';
 
-import { SEO_TITLE } from "@constants/seo";
-import BlockContent from "@sanity/block-content-to-react";
+import { useRouter } from 'next/router';
+import ErrorPage from 'next/error';
+import Head from 'next/head';
 
-import { getAllPostsWithSlug, getPostAndMorePosts } from "@queries/post";
+import { SEO_TITLE } from '@constants/seo';
+import BlockContent from '@sanity/block-content-to-react';
 
-import Container from "@/components/Layout/container";
+import { getAllPostsWithSlug, getPostAndMorePosts } from '@queries/post';
 
-import Layout from "@/components/Layout";
+import Container from '@/components/Layout/container';
 
-import CoverImage from "@/components/Images/cover-image";
-import Header from "@components/Typography/headerOne";
+import Layout from '@/components/Layout';
 
-import { formatDate } from "@services/format";
+import CoverImage from '@/components/Images/cover-image';
+import Header from '@components/Typography/headerOne';
+
+import { formatDate } from '@services/format';
 
 export default function Post({ post, morePosts, preview }) {
   const router = useRouter();
+  const containerRef = useRef(null);
   if (!router.isFallback && !post?.slug) {
     return <ErrorPage statusCode={404} />;
   }
@@ -26,32 +30,38 @@ export default function Post({ post, morePosts, preview }) {
       {router.isFallback ? (
         <>{/* <PostTitle>Loading…</PostTitle> */}</>
       ) : (
-        <>
-          <article>
-            <Head>
-              <title>
-                {post.seoTitle} | {SEO_TITLE}
-              </title>
-              {/* <meta property="og:image" content={post.ogImage.url} /> */}
-            </Head>
-            <Container>
-              <Header>{post.title}</Header>
-              <div className="mb-6 text-xl font-black text-primary md:text-right">
-                {formatDate(post.date)}
-              </div>
-            </Container>
+        <LocomotiveScrollProvider
+          options={{ smooth: true, lerp: 0.05 }}
+          containerRef={containerRef}
+          watch={[]}
+        >
+          <main data-scroll-container ref={containerRef} id='scroll-container'>
+            <article className='space-y-32' data-scroll-section>
+              <Head>
+                <title>
+                  {post.seoTitle} | {SEO_TITLE}
+                </title>
+                {/* <meta property="og:image" content={post.ogImage.url} /> */}
+              </Head>
+              <Container>
+                <Header>{post.title}</Header>
+                <div className='mb-6 text-xl font-black text-primary md:text-right'>
+                  {formatDate(post.date)}
+                </div>
+              </Container>
 
-            <div className="px-4 mx-auto mb-8 max-w-7xl sm:px-6 lg:px-8 md:mb-16">
-              <CoverImage title={post.title} url={post.coverImage} />
-            </div>
-
-            <Container>
-              <div className="max-w-2xl ml-auto prose lg:prose-xl">
-                <BlockContent blocks={post.content} />
+              <div className='px-4 mx-auto mb-8 max-w-7xl sm:px-6 lg:px-8 md:mb-16'>
+                <CoverImage title={post.title} url={post.coverImage} />
               </div>
-            </Container>
-          </article>
-        </>
+
+              <Container>
+                <div className='max-w-2xl ml-auto prose lg:prose-xl'>
+                  <BlockContent blocks={post.content} />
+                </div>
+              </Container>
+            </article>
+          </main>
+        </LocomotiveScrollProvider>
       )}
     </Layout>
   );
