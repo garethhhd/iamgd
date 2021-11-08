@@ -5,7 +5,6 @@ export default function HeaderTwo({ text }) {
   const el = useRef();
 
   useEffect(() => {
-    console.log('hello');
     GSAP.fromTo(
       el.current,
       { y: '100%', autoAlpha: 0, rotation: -5 },

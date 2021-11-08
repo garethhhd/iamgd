@@ -1,3 +1,4 @@
+import Footer from './footer';
 import Mouse from './mouse';
 
 export default function Layout({ preview, children }) {
@@ -5,6 +6,7 @@ export default function Layout({ preview, children }) {
     <>
       <Mouse />
       {children}
+      <Footer />
     </>
   );
 }

@@ -1,9 +1,9 @@
-import gsap from "gsap";
+import GSAP from 'gsap';
 
 const select = (e) => document.querySelector(e);
 
 export const handleLogoTilt = () => {
-  select("body").addEventListener("mousemove", moveLogo);
+  select('body').addEventListener('mousemove', moveLogo);
 };
 
 function moveLogo(e) {
@@ -15,23 +15,23 @@ function moveLogo(e) {
   const xPos = offsetX / clientWidth - 0.5;
   const yPos = offsetY / clientHeight - 0.5;
 
-  gsap.to(".logo", {
+  GSAP.to('.logo', {
     duration: 1.2,
     rotationY: xPos * 15,
     rotationX: yPos * 15,
-    ease: "power3.out",
+    ease: 'power3.out',
   });
 }
 
 export const handleHover = () => {
-  const links = gsap.utils.toArray("a");
+  const links = GSAP.utils.toArray('a');
 
   links.forEach((link) => {
-    link.addEventListener("mouseleave", (e) => {
-      link.classList.add("animate-out");
+    link.addEventListener('mouseleave', (e) => {
+      link.classList.add('animate-out');
     });
     link.ontransitionend = function () {
-      link.classList.remove("animate-out");
+      link.classList.remove('animate-out');
     };
   });
 };
