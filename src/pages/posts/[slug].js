@@ -1,6 +1,3 @@
-import { useRef } from 'react';
-import { LocomotiveScrollProvider } from 'react-locomotive-scroll';
-
 import { useRouter } from 'next/router';
 import ErrorPage from 'next/error';
 import Head from 'next/head';
@@ -21,7 +18,6 @@ import { formatDate } from '@services/format';
 
 export default function Post({ post, morePosts, preview }) {
   const router = useRouter();
-  const containerRef = useRef(null);
   if (!router.isFallback && !post?.slug) {
     return <ErrorPage statusCode={404} />;
   }
@@ -30,38 +26,30 @@ export default function Post({ post, morePosts, preview }) {
       {router.isFallback ? (
         <>{/* <PostTitle>Loading…</PostTitle> */}</>
       ) : (
-        <LocomotiveScrollProvider
-          options={{ smooth: true, lerp: 0.05 }}
-          containerRef={containerRef}
-          watch={[]}
-        >
-          <main data-scroll-container ref={containerRef} id='scroll-container'>
-            <article className='space-y-32' data-scroll-section>
-              <Head>
-                <title>
-                  {post.seoTitle} | {SEO_TITLE}
-                </title>
-                {/* <meta property="og:image" content={post.ogImage.url} /> */}
-              </Head>
-              <Container>
-                <Header>{post.title}</Header>
-                <div className='mb-6 text-xl font-black text-primary md:text-right'>
-                  {formatDate(post.date)}
-                </div>
-              </Container>
+        <article className='space-y-32'>
+          <Head>
+            <title>
+              {post.seoTitle} | {SEO_TITLE}
+            </title>
+            {/* <meta property="og:image" content={post.ogImage.url} /> */}
+          </Head>
+          <Container>
+            <Header>{post.title}</Header>
+            <div className='mb-6 text-xl font-black text-primary md:text-right'>
+              {formatDate(post.date)}
+            </div>
+          </Container>
 
-              <div className='px-4 mx-auto mb-8 max-w-7xl sm:px-6 lg:px-8 md:mb-16'>
-                <CoverImage title={post.title} url={post.coverImage} />
-              </div>
+          <div className='px-4 mx-auto mb-8 max-w-7xl sm:px-6 lg:px-8 md:mb-16'>
+            <CoverImage title={post.title} url={post.coverImage} />
+          </div>
 
-              <Container>
-                <div className='max-w-2xl ml-auto prose lg:prose-xl'>
-                  <BlockContent blocks={post.content} />
-                </div>
-              </Container>
-            </article>
-          </main>
-        </LocomotiveScrollProvider>
+          <Container>
+            <div className='max-w-2xl ml-auto prose lg:prose-xl'>
+              <BlockContent blocks={post.content} />
+            </div>
+          </Container>
+        </article>
       )}
     </Layout>
   );

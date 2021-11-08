@@ -1,4 +1,4 @@
-import Mouse from './cursor';
+import Mouse from './mouse';
 
 export default function Layout({ preview, children }) {
   return (

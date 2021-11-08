@@ -29,21 +29,6 @@ a.nav.animate-out::after {
   transform: translateX(100%);
 }
 
-a.line-item::after {
-  @apply absolute bottom-0 block w-full bg-white;
-  content: '';
-  height: 4px;
-  transform: translateX(-101%);
-}
-a.line-item:hover::after {
-  transition: transform 0.4s cubic-bezier(0.5, 0.7, 0.4, 1);
-  transform: translateX(0);
-}
-a.line-item.animate-out::after {
-  transition: transform 0.4s cubic-bezier(0.5, 0.7, 0.4, 1);
-  transform: translateX(100%);
-}
-
 code {
   @apply inline px-2 py-3 font-mono text-sm leading-loose bg-gray-100;
 }
@@ -70,4 +55,9 @@ pre code {
     stroke-width: 1px;
     opacity: 0.3;
   }
+}
+
+span span {
+  display: inline-block;
+  white-space: pre-wrap;
 }
